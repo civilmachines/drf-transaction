@@ -8,15 +8,15 @@ class RangeFiltering(FilterSet):
     from django_filters.rest_framework import NumberFilter, ModelMultipleChoiceFilter, CharFilter, DateFilter
     from .models import TransactionMode
 
-    start_date = DateFilter(name='transaction_date', lookup_expr='gte')
-    end_date = DateFilter(name='transaction_date', lookup_expr='lte')
-    start_amount = NumberFilter(name='amount', lookup_expr='gte')
-    end_amount = NumberFilter(name='amount', lookup_expr='lte')
-    mode = ModelMultipleChoiceFilter(name='mode', queryset=TransactionMode.objects.all())
-    amount = NumberFilter(name='amount')
-    id = NumberFilter(name='id')
-    category = CharFilter(name='category')
-    transaction_date = DateFilter(name='transaction_date')
+    start_date = DateFilter(field_name='transaction_date', lookup_expr='gte')
+    end_date = DateFilter(field_name='transaction_date', lookup_expr='lte')
+    start_amount = NumberFilter(field_name='amount', lookup_expr='gte')
+    end_amount = NumberFilter(field_name='amount', lookup_expr='lte')
+    mode = ModelMultipleChoiceFilter(field_name='mode', queryset=TransactionMode.objects.all())
+    amount = NumberFilter(field_name='amount')
+    id = NumberFilter(field_name='id')
+    category = CharFilter(field_name='category')
+    transaction_date = DateFilter(field_name='transaction_date')
 
     class Meta:
         from .models import TransactionDetail

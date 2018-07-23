@@ -7,13 +7,13 @@ class ShowTransactionAmount(ListAPIView):
     This view is to show the details of transactions.
     """
     from .serializers import ShowTransactionDetailsSerializer
-    from drfaddons.serializer import IsOwnerFilterBackend
+    from drfaddons.filters import IsOwnerFilterBackend
     from django_filters.rest_framework import DjangoFilterBackend
     from rest_framework.filters import SearchFilter, OrderingFilter
     from .filters import RangeFiltering
     from .models import TransactionDetail
 
-    queryset = TransactionDetail.objects.all().order_by('contact_id')
+    queryset = TransactionDetail.objects.all().order_by('-transaction_date').order_by('-create_date')
     serializer_class = ShowTransactionDetailsSerializer
     filter_backends = (IsOwnerFilterBackend, DjangoFilterBackend, SearchFilter, OrderingFilter)
 
@@ -62,7 +62,7 @@ class DeleteTransactionAmount(DestroyAPIView):
     """
     This view is to delete a transaction.
     """
-    from drfaddons.serializer import IsOwnerFilterBackend
+    from drfaddons.filters import IsOwnerFilterBackend
     from .serializers import DeleteTransactionDetailsSerializer
     from .models import TransactionDetail
 
@@ -76,7 +76,7 @@ class UpdateTransactionAmount(UpdateAPIView):
     This view is to update a transaction.
     """
     from .serializers import UpdateTransactionDetailsSerializer
-    from drfaddons.serializer import IsOwnerFilterBackend
+    from drfaddons.filters import IsOwnerFilterBackend
     from .models import TransactionDetail
 
     queryset = TransactionDetail.objects.all()
@@ -103,6 +103,6 @@ class ShowMode(ListAPIView):
     from rest_framework.permissions import AllowAny
 
     permission_classes = (AllowAny, )
-    queryset = TransactionMode.objects.all()
+    queryset = TransactionMode.objects.all().order_by('-create_date')
     serializer_class = ShowModeSerializer
     filter_backends = ()
