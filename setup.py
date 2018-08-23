@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="drfaddons",
+    name="drf_transaction",
     version=__import__('drf_transaction').__version__,
     author=__import__('drf_transaction').__author__,
     author_email="pypidev@civilmachines.com",
@@ -16,6 +16,7 @@ setuptools.setup(
     python_requires=">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*",
     packages=setuptools.find_packages(),
     include_package_data=True,
+    install_requires=open('requirements.txt').read().split(),
     classifiers=(
         'Development Status :: 5 - Production/Stable',
         'Environment :: Web Environment',
